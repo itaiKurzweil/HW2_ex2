@@ -2,6 +2,7 @@ import os
 from download_video import download_video
 from detect_scenes import detect_and_save_scenes
 from generate_captions import generate_captions
+from gemini_api import extract_frames, search_in_gemini , upload_to_gemini, wait_for_files_active 
 from search_captions import load_captions, search_captions_advanced, CaptionCompleter
 from create_collage import create_collage
 from prompt_toolkit import prompt
@@ -73,25 +74,33 @@ def main():
         create_collage(image_paths, collage_file)
         print(f"Collage created and saved to {collage_file}")
         
-    # elif choice == "2":
-    # # Video Model Workflow (Gemini API)
-    # print("\n--- Using Video Model (Gemini) ---")
-    # user_query = input("Using a video model. What would you like me to find in the video? ").strip()
+    elif choice == "2":
+        # Video Model Workflow (Gemini API)
+        print("\n--- Using Video Model (Gemini) ---")
+        user_query = input("Using a video model. What would you like me to find in the video? ").strip()
 
-    # # Step 2: Search using Gemini API
-    # frame_folder = "gemini_frames"
-    # os.makedirs(frame_folder, exist_ok=True)
-    # relevant_frames = search_with_gemini(video_file, user_query, frame_folder)
-    # if not relevant_frames:
-    #     print(f"No frames found matching query '{user_query}'.")
-    #     return
-    # else:
-    #     print(f"Frames found for query '{user_query}'. Creating collage...")
+        # Step 2: Search using Gemini API
+        frame_folder = "gemini_frames"
+        video_path = video_file
+        matches_time = search_in_gemini(video_path, user_query)
 
-    # # Step 3: Create a collage of relevant frames
-    # collage_file = "collage.png"
-    # create_collage(relevant_frames, collage_file)
-    # print(f"Collage created and saved to {collage_file}")
+        if not matches_time:
+            print(f"No timestamps found matching query '{user_query}'.")
+            return
+
+        # Extract frames from the video
+        extracted_frames = extract_frames(matches_time, frame_folder, video_path)
+
+        if not extracted_frames:
+            print(f"No frames extracted for query '{user_query}'.")
+            return
+
+        # Step 3: Create a collage of relevant frames
+        collage_file = "collage.png"
+        create_collage(extracted_frames, collage_file)
+        print(f"Collage created and saved to {collage_file}")
+
+
 
 if __name__ == "__main__":
     main()
