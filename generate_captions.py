@@ -64,9 +64,3 @@ def generate_captions(scene_images_folder, model_path, output_file="scene_captio
         raise RuntimeError(f"Failed to generate captions: {e}")
 
 
-# if __name__ == "__main__":
-#     # Example usage
-#     scene_images_folder = "scene_images"  # Folder where scene images are saved
-#     model_path = r"C:\Users\itaik\Downloads\moondream-2b-int8.mf\moondream-2b-int8.mf"  # Path to model
-#     captions = generate_captions(scene_images_folder, model_path)
-#     print(f"Generated captions: {captions}")
