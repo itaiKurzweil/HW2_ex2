@@ -23,9 +23,3 @@ def download_video(query, output_file="video.mp4"):
     except Exception as e:
         raise RuntimeError(f"Failed to download video: {e}")
     
-if __name__ == "__main__":
-    try:
-        video_file = download_video("super mario movie trailer")
-        print(f"Video downloaded to: {video_file}")
-    except Exception as e:
-        print(f"Error: {e}")
