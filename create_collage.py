@@ -58,25 +58,25 @@ def create_collage(image_paths, output_file="collage.png", thumbnail_size=(200, 
     collage.show()
 
 
-if __name__ == "__main__":
-    # Load captions
-    captions_file = "scene_captions.json"
-    captions = load_captions(captions_file)
+# if __name__ == "__main__":
+#     # Load captions
+#     captions_file = "scene_captions.json"
+#     captions = load_captions(captions_file)
 
-    # Set search parameters
-    threshold = 60  # Adjust similarity sensitivity
-    search_word = input("Search the video using a word: ").strip()
+#     # Set search parameters
+#     threshold = 60  # Adjust similarity sensitivity
+#     search_word = input("Search the video using a word: ").strip()
 
-    # Search for matching scenes
-    matches = search_captions_advanced(captions, search_word, threshold)
+#     # Search for matching scenes
+#     matches = search_captions_advanced(captions, search_word, threshold)
 
-    # Ensure matches are valid
-    if not matches:
-        print(f"No scenes found matching '{search_word}' with the given threshold ({threshold}).")
-    else:
-        print(f"Found scenes: {matches}")
+#     # Ensure matches are valid
+#     if not matches:
+#         print(f"No scenes found matching '{search_word}' with the given threshold ({threshold}).")
+#     else:
+#         print(f"Found scenes: {matches}")
 
-        # Create the collage using matching scenes
-        scene_images_folder = "scene_images"
-        image_paths = [os.path.join(scene_images_folder, f"scene_{scene}.jpg") for scene in matches]
-        create_collage(image_paths)
+#         # Create the collage using matching scenes
+#         scene_images_folder = "scene_images"
+#         image_paths = [os.path.join(scene_images_folder, f"scene_{scene}.jpg") for scene in matches]
+#         create_collage(image_paths)
