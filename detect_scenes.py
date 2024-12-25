@@ -40,8 +40,4 @@ def detect_and_save_scenes(video_path, output_folder="scene_images", min_scene_l
     except Exception as e:
         raise RuntimeError(f"Failed to detect and save scenes: {e}")
 
-if __name__ == "__main__":
-    video_path = "video.mp4"
-    output_folder = "scene_images"
-    scenes = detect_and_save_scenes(video_path, output_folder, min_scene_length=15, threshold=30.0)
-    print(f"Scenes saved: {len(scenes)}")
+
