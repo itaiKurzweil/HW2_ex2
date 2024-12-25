@@ -6,10 +6,11 @@ import subprocess
 
 # Configure the Gemini API
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-print("Uploading video to Gemini API...")
+
 
 def upload_to_gemini(path, mime_type=None):
     """Uploads the given file to Gemini."""
+    print("Uploading video to Gemini API...")
     file = genai.upload_file(path, mime_type=mime_type)
     print(f"Uploaded file '{file.display_name}' as: {file.uri}")
     return file
