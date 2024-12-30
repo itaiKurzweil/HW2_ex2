@@ -73,7 +73,8 @@ def extract_frames(matches_time, frame_folder, video_path):
     for idx, timestamp in enumerate(matches_time):
         output_image_path = os.path.join(frame_folder, f"frame_{idx:03d}.jpg")
         command = [
-            "ffmpeg", "-ss", timestamp, "-i", video_path,
+            "ffmpeg", "-y", 
+            "-ss", str(timestamp), "-i", video_path,
             "-frames:v", "1", "-q:v", "2", output_image_path
         ]
         try:
