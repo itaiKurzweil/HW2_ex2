@@ -48,22 +48,4 @@ def search_captions_advanced(captions, keyword, threshold):
 
 
 
-# if __name__ == "__main__":
-#     captions_file = "scene_captions.json"
-#     captions = load_captions(captions_file)
 
-#     # Set your threshold for similarity
-#     threshold = 60  # Adjust this value to control similarity sensitivity
-#     print(f"\nUsing threshold: {threshold}")
-
-#     # Prompt user for search input
-#     search_word = input("Search the video using a word: ").strip()
-
-#     # Perform advanced search with rapidfuzz
-#     matches = search_captions_advanced(captions, search_word, threshold)
-
-#     # Display results
-#     if matches:
-#         print(f"Scenes with similar captions to '{search_word}' (threshold={threshold}): {matches}")
-#     else:
-#         print(f"No scenes found matching '{search_word}' with the given threshold ({threshold}).")
