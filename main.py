@@ -18,7 +18,7 @@ def main():
         print("Invalid choice. Exiting...")
         return
     
-    # Step 1: Download the video
+    # Download the video
     video_file = "downloaded_video.mp4"
     if not os.path.exists(video_file):
         video_url = "https://www.youtube.com/results?search_query=super+mario+movie+trailer"  # Super Mario movie trailer
@@ -31,7 +31,7 @@ def main():
         # Image Model Workflow
         print("\n--- Using Image Model ---")
         
-        # Step 2: Detect scenes in the video
+        # Detect scenes in the video
         scene_images_folder = "scene_images"
         os.makedirs(scene_images_folder, exist_ok=True)
         if not os.listdir(scene_images_folder):
@@ -40,7 +40,7 @@ def main():
         else:
             print(f"Scenes already detected and saved in {scene_images_folder}")
 
-        # Step 3: Generate captions for the detected scenes
+        # Generate captions for the detected scenes
         model_path = "path_to_moondream_model"  # Update with the correct model path
         captions_file = "scene_captions.json"
         if not os.path.exists(captions_file):
@@ -49,7 +49,7 @@ def main():
         else:
             print(f"Captions already exist in {captions_file}")
 
-        # Step 4: Search captions dynamically with auto-complete
+        # Search captions dynamically with auto-complete
         captions = load_captions(captions_file)
         completer = CaptionCompleter(captions)  # Use the completer for suggestions
         search_word = prompt("Search the video using a word: ", completer=completer).strip()
@@ -68,7 +68,7 @@ def main():
         else:
             print(f"Found scenes: {matches}")
 
-        # Step 5: Create a collage of the matched scenes
+        # Create a collage of the matched scenes
         image_paths = [os.path.join(scene_images_folder, f"scene_{scene}.jpg") for scene in matches]
         collage_file = "collage.png"
         create_collage(image_paths, collage_file)
@@ -79,7 +79,7 @@ def main():
         print("\n--- Using Video Model (Gemini) ---")
         user_query = input("Using a video model. What would you like me to find in the video? ").strip()
 
-        # Step 2: Search using Gemini API
+        # Search using Gemini API
         frame_folder = "gemini_frames"
         video_path = video_file
         matches_time = search_in_gemini(video_path, user_query)
@@ -95,7 +95,7 @@ def main():
             print(f"No frames extracted for query '{user_query}'.")
             return
 
-        # Step 3: Create a collage of relevant frames
+        # Create a collage of relevant frames
         collage_file = "collage.png"
         create_collage(extracted_frames, collage_file)
         print(f"Collage created and saved to {collage_file}")
